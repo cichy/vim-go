@@ -6,7 +6,7 @@ scriptencoding utf-8
 
 func! Test_Callers() abort
   try
-    let l:tmp = gotest#write_file('calls/caller.go', [
+    let l:tmp = gotest#write_file('calls/caller.gno', [
           \ 'package main',
           \ '',
           \ 'import "fmt"',

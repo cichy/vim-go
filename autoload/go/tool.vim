@@ -25,7 +25,7 @@ function! go#tool#Files(...) abort
 
   let combined = ''
   for sf in source_files
-    " Strip dot in case people used ":GoFiles .GoFiles".
+    " Strip dot in case people used ":GoFiles .gnoFiles".
     let sf = substitute(sf, '^\.', '', '')
 
     " Make sure the passed options are valid.

@@ -5,7 +5,7 @@ set cpo&vim
 func! Test_fillstruct() abort
   try
     let g:go_fillstruct_mode = 'fillstruct'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import "net/mail"',
           \ "var addr = mail.\x1fAddress{}"])
@@ -25,7 +25,7 @@ endfunc
 func! Test_fillstruct_line() abort
   try
     let g:go_fillstruct_mode = 'fillstruct'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import "net/mail"',
           \ "\x1f" . 'var addr = mail.Address{}'])
@@ -45,7 +45,7 @@ endfunc
 func! Test_fillstruct_two_line() abort
   try
     let g:go_fillstruct_mode = 'fillstruct'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import (',
           \ '"fmt"',
@@ -75,7 +75,7 @@ endfunc
 func! Test_fillstruct_two_cursor() abort
   try
     let g:go_fillstruct_mode = 'fillstruct'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import (',
           \ '"fmt"',
@@ -102,7 +102,7 @@ endfunc
 func! Test_gopls_fillstruct() abort
   try
     let g:go_fillstruct_mode = 'gopls'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import "net/mail"',
           \ "var addr = mail.\x1fAddress{}"])
@@ -128,7 +128,7 @@ endfunc
 func! Test_gopls_fillstruct_line() abort
   try
     let g:go_fillstruct_mode = 'gopls'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import "net/mail"',
           \ "\x1f" . 'var addr = mail.Address{}'])
@@ -154,7 +154,7 @@ endfunc
 func! Test_gopls_fillstruct_two_line() abort
   try
     let g:go_fillstruct_mode = 'gopls'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import (',
           \ '"fmt"',
@@ -187,7 +187,7 @@ endfunc
 func! Test_gopls_fillstruct_two_cursor() abort
   try
     let g:go_fillstruct_mode = 'gopls'
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ 'import (',
           \ '"fmt"',

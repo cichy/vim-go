@@ -8,12 +8,12 @@ function! go#alternate#Switch(bang, cmd) abort
   if empty(file)
     call go#util#EchoError("no buffer name")
     return
-  elseif file =~# '^\f\+_test\.go$'
-    let l:root = split(file, '_test.go$')[0]
-    let l:alt_file = l:root . ".go"
-  elseif file =~# '^\f\+\.go$'
-    let l:root = split(file, ".go$")[0]
-    let l:alt_file = l:root . '_test.go'
+  elseif file =~# '^\f\+_test\.gno$'
+    let l:root = split(file, '_test.gno$')[0]
+    let l:alt_file = l:root . ".gno"
+  elseif file =~# '^\f\+\.gno$'
+    let l:root = split(file, ".gno$")[0]
+    let l:alt_file = l:root . '_test.gno'
   else
     call go#util#EchoError("not a go file")
     return

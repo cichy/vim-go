@@ -8,7 +8,7 @@ func! Test_JobDirWithSpaces()
   endif
 
   try
-    let l:filename = 'job/dir has spaces/main.go'
+    let l:filename = 'job/dir has spaces/main.gno'
     let l:tmp = gotest#load_fixture(l:filename)
     call go#util#Chdir(printf('%s/src/job/dir has spaces', l:tmp))
     call go#util#Exec(['go', 'mod', 'init', 'vim-go.test/job'])

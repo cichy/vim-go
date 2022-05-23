@@ -24,7 +24,7 @@ function! s:getinfo(str, name)
   try
     let g:go_info_mode = 'gopls'
 
-    let l:tmp = gotest#write_file(a:name . '/position/position.go', [
+    let l:tmp = gotest#write_file(a:name . '/position/position.gno', [
           \ 'package position',
           \ '',
           \ 'func Example() {',
@@ -44,8 +44,8 @@ endfunction
 
 func! Test_Format() abort
   try
-    let expected = join(readfile("test-fixtures/lsp/fmt/format_golden.go"), "\n")
-    let l:tmp = gotest#load_fixture('lsp/fmt/format.go')
+    let expected = join(readfile("test-fixtures/lsp/fmt/format_golden.gno"), "\n")
+    let l:tmp = gotest#load_fixture('lsp/fmt/format.gno')
 
     call go#lsp#Format()
 
@@ -60,8 +60,8 @@ endfunc
 
 func! Test_Format_SingleNewline() abort
   try
-    let expected = join(readfile("test-fixtures/lsp/fmt/format_golden.go"), "\n")
-    let l:tmp = gotest#load_fixture('lsp/fmt/newline.go')
+    let expected = join(readfile("test-fixtures/lsp/fmt/format_golden.gno"), "\n")
+    let l:tmp = gotest#load_fixture('lsp/fmt/newline.gno')
 
     call go#lsp#Format()
 
@@ -76,8 +76,8 @@ endfunc
 
 func! Test_Imports() abort
   try
-    let expected = join(readfile("test-fixtures/lsp/imports/imports_golden.go"), "\n")
-    let l:tmp = gotest#load_fixture('lsp/imports/imports.go')
+    let expected = join(readfile("test-fixtures/lsp/imports/imports_golden.gno"), "\n")
+    let l:tmp = gotest#load_fixture('lsp/imports/imports.gno')
 
     call go#lsp#Imports()
 

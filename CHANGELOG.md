@@ -56,7 +56,7 @@ IMPROVEMENTS:
 * Install tools with `go install` instead of `go get`.
   [[GH-3317]](https://github.com/fatih/vim-go/pull/3317)
   [[GH-3370]](https://github.com/fatih/vim-go/pull/3370)
-* Update `:GoPlay` to use `go.dev/play` instead of `play.golang.org`.
+* Update `:GoPlay` to use `go.dev/play` instead of `play.gnolang.org`.
   [[GH-3331]](https://github.com/fatih/vim-go/pull/3331)
   [[GH-3348]](https://github.com/fatih/vim-go/pull/3348)
 * Recurse local variables more deeply when debugging.
@@ -228,7 +228,7 @@ IMPROVEMENTS:
   [[GH-2883]](https://github.com/fatih/vim-go/pull/2883)
 * Beautify the godoc pop up window border.
   [[GH-2900]](https://github.com/fatih/vim-go/pull/2900)
-* Default `g:go_doc_url` to https://pkg.go.dev.
+* Default `g:go_doc_url` to https://pkg.gno.dev.
   [[GH-2884]](https://github.com/fatih/vim-go/pull/2884)
 * Default `g:go_gopls_options` to `[-remote=auto]` to share gopls instances
   with other plugins and multiple instances of Vim.
@@ -309,7 +309,7 @@ BUG FIXES:
 * Handle breakpoints that are already set before calling `:GoDebugStart` or
   `:GoDebugTest` in some locales that cause the `sign place` output to vary.
   [[GH-2921]](https://github.com/fatih/vim-go/pull/2921)
-* Handle diagnostic errors at the end of a .go file.
+* Handle diagnostic errors at the end of a .gno file.
   [[GH-2942]](https://github.com/fatih/vim-go/pull/2942)
 * Fix the `go-implements` mapping to use respect `g:go_implements_mode`.
   [[GH-2944]](https://github.com/fatih/vim-go/pull/2944)
@@ -1182,7 +1182,7 @@ IMPROVEMENTS:
 * `g:go_snippet_engine` now defaults to `automatic` to use the first installed
   snippet engine it can find.
   [[GH-1589]](https://github.com/fatih/vim-go/pull/1589).
-* Make sure temporary files created for `:GoFmt` end with `.go` suffix as this
+* Make sure temporary files created for `:GoFmt` end with `.gno` suffix as this
   is required by some Go formatting tools
   [[GH-1601]](https://github.com/fatih/vim-go/pull/1601).
 
@@ -1326,20 +1326,20 @@ FEATURES:
   read the documentation for the `g:go_fold_enable` setting. [[GH-1339]](https://github.com/fatih/vim-go/pull/1339)
   [[GH-1377]](https://github.com/fatih/vim-go/pull/1377)
 * `:GoFiles` accepts now an argument to change the type of files it can show.
-  By default it shows`.go source files` but now it can be changed to show
+  By default it shows`.gno source files` but now it can be changed to show
   various kind of files. The full list can be seen via `go list --help` under
   the `// Source Files` section [[GH-1372]](https://github.com/fatih/vim-go/pull/1372) i.e:
 
 ```
-:GoFiles CgoFiles        // shows .go sources files that import "C"
-:GoFiles TestGoFiles     // shows _test.go files in package
-:GoFiles IgnoredGoFiles  // shows .go sources ignored due to build constraints
+:GoFiles CgoFiles        // shows .gno sources files that import "C"
+:GoFiles TestGoFiles     // shows _test.gno files in package
+:GoFiles IgnoredGoFiles  // shows .gno sources ignored due to build constraints
 etc..
 ```
 
 IMPROVEMENTS
 
-* Files created with `_test.go` extension have a new template with a ready to
+* Files created with `_test.gno` extension have a new template with a ready to
   go test function. The template can be changed with the
   `g:go_template_test_file` setting. [[GH-1318]](https://github.com/fatih/vim-go/pull/1318)
 * Improve performance for highly used operations by caching `go env` calls [[GH-1320]](https://github.com/fatih/vim-go/pull/1320)
@@ -1441,7 +1441,7 @@ BUG FIXES:
 
 BACKWARDS INCOMPATIBILITIES:
 
-* `:GoLint` works on the whole directory instead of the current file. To use it for the current file give it as an argument, i.e `:GoLint foo.go` [[GH-1295]](https://github.com/fatih/vim-go/pull/1295)
+* `:GoLint` works on the whole directory instead of the current file. To use it for the current file give it as an argument, i.e `:GoLint foo.gno` [[GH-1295]](https://github.com/fatih/vim-go/pull/1295)
 * `go_snippet_case_type` is removed in favor of the new `go_addtags_transform` setting [[GH-1299]](https://github.com/fatih/vim-go/pull/1299)
 * `go_imports_bin` is removed to avoid confusion as it would lead to race
   conditions when set to `gofmt` along with the usage of `go_fmt_command`
@@ -1516,7 +1516,7 @@ FEATURES:
 
 * Travis test integration has been added. Now any file that is added as
   `<name>_test.vim` will be automatically tested in for every Pull Request
-  (just like how we add tests to Go with `_test.go`). Going forward this will
+  (just like how we add tests to Go with `_test.gno`). Going forward this will
   tremendously increase the stability and decrease the maintenance burden of
   vim-go. [[GH-1157]](https://github.com/fatih/vim-go/pull/1157)
 * Add new `g:go_updatetime` setting to change the default updatetime (which was hardcoded previously) [[GH-1055]](https://github.com/fatih/vim-go/pull/1055)
@@ -1713,7 +1713,7 @@ FEATURES:
 * New **`:GoSameIds`** command. When called highlights all same identifiers in the current file. Can be also enabled to highlight identifiers automatically (with `:GoSameIdsAutoToggle` or `g:go_auto_sameids`). Checkout the demo to see it in action: https://twitter.com/fatih/status/753673709278339072. [[GH-936]](https://github.com/fatih/vim-go/pull/936)
 * New **`:GoWhicherrs`** command. It shows all possible values of the selected error variable. [[GH-948]](https://github.com/fatih/vim-go/pull/948)
 * Add new `errp` snippet to expand an `if err != nil { panic() }` clause [[GH-926]](https://github.com/fatih/vim-go/pull/926)
-* If you open a new buffer with a Go filename it get automatically populated based on the directory. If there are no Go files a simple main package is created, otherwise the file will include the package declaration line based on the package in the current directory. Checkout the demo to see it in action: https://twitter.com/fatih/status/748333086643994624. This is enabled by default. Can be disabled with `let g:go_template_autocreate = 0`. You can use your own template with `let g:go_template_file = "foo.go"` and putting the file under the `templates/` folder. [[GH-918]](https://github.com/fatih/vim-go/pull/918)
+* If you open a new buffer with a Go filename it get automatically populated based on the directory. If there are no Go files a simple main package is created, otherwise the file will include the package declaration line based on the package in the current directory. Checkout the demo to see it in action: https://twitter.com/fatih/status/748333086643994624. This is enabled by default. Can be disabled with `let g:go_template_autocreate = 0`. You can use your own template with `let g:go_template_file = "foo.gno"` and putting the file under the `templates/` folder. [[GH-918]](https://github.com/fatih/vim-go/pull/918)
 * Added new toggle commands to enable/disable feature that run for your
   automatic. For example if you have `let g:go_auto_type_info = 1` enabled, you
   can now easily enable/disable it on the fly. Support added with the following

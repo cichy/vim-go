@@ -36,12 +36,12 @@ function! s:sink(str) abort
 
     let vals = matchlist(a:str[1], '|\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)|')
 
-    " i.e: main.go
+    " i.e: main.gno
     let filename =  vals[1]
     let line =  vals[2]
     let col =  vals[3]
 
-    " i.e: /Users/fatih/vim-go/main.go
+    " i.e: /Users/fatih/vim-go/main.gno
     let filepath =  fnamemodify(filename, ":p")
 
     let cmd = get({'ctrl-x': 'split',

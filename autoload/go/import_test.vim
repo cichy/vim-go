@@ -4,7 +4,7 @@ set cpo&vim
 
 func! Test_SwitchImportAddIgnoresCommented()
   try
-    let l:tmp = gotest#write_file('import/import.go', [
+    let l:tmp = gotest#write_file('import/import.gno', [
           \ 'package import',
           \ '',
           \ 'import (',

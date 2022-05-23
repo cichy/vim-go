@@ -4,49 +4,49 @@ set cpo&vim
 
 func! Test_Complete_GOPATH_simple() abort
   let $GOPATH = fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package'
-  silent exe 'edit ' . $GOPATH . '/src/package/package.go'
+  silent exe 'edit ' . $GOPATH . '/src/package/package.gno'
   call s:complete('package', ['package'])
   call delete(printf('%s/pkg', $GOPATH), 'rf')
 endfunc
 
 func! Test_Complete_Module_simple() abort
-  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.go'
+  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.gno'
   call s:complete('package', ['package'])
 endfunc
 
 func! Test_Complete_GOPATH_subdirs() abort
   let $GOPATH = fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package'
-  silent exe 'edit ' . $GOPATH . '/src/package/package.go'
+  silent exe 'edit ' . $GOPATH . '/src/package/package.gno'
   call s:complete('package/', ['package/bar', 'package/baz'])
   call delete(printf('%s/pkg', $GOPATH), 'rf')
 endfunc
 
 func! Test_Complete_Module_subdirs() abort
-  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.go'
+  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.gno'
   call s:complete('package/', ['package/bar', 'package/baz'])
 endfunc
 
 func! Test_Complete_GOPATH_baronly() abort
   let $GOPATH = fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package'
-  silent exe 'edit ' . $GOPATH . '/src/package/package.go'
+  silent exe 'edit ' . $GOPATH . '/src/package/package.gno'
   call s:complete('package/bar', ['package/bar'])
   call delete(printf('%s/pkg', $GOPATH), 'rf')
 endfunc
 
 func! Test_Complete_Module_baronly() abort
-  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.go'
+  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.gno'
   call s:complete('package/bar', ['package/bar'])
 endfunc
 
 func! Test_Complete_GOPATH_vendor() abort
   let $GOPATH = fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package'
-  silent exe 'edit ' . $GOPATH . '/src/package/package.go'
+  silent exe 'edit ' . $GOPATH . '/src/package/package.gno'
   call s:complete('foo', ['foo'])
   call delete(printf('%s/pkg', $GOPATH), 'rf')
 endfunc
 
 func! Test_Complete_Module_vendor() abort
-  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.go'
+  silent exe 'edit ' . fnameescape(fnamemodify(getcwd(), ':p')) . 'test-fixtures/package/src/package/package.gno'
   call s:complete('foo', ['foo'])
 endfunc
 

@@ -372,9 +372,9 @@ function! go#lsp#message#ConfigurationResult(items) abort
 
     if l:gofumpt isnot v:null
       if l:gofumpt
-        let l:config.gofumpt = v:true
+        let l:config.gnofumpt = v:true
       else
-        let l:config.gofumpt = v:false
+        let l:config.gnofumpt = v:false
       endif
     endif
 

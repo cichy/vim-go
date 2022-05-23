@@ -62,7 +62,7 @@ experience.
     display `GOPATH` with |:GoPath|.
   * Integrated and improved snippets, supporting `ultisnips`, `neosnippet`,
     and `vim-minisnip`.
-  * Share your current code to play.golang.org with |:GoPlay|.
+  * Share your current code to play.gnolang.org with |:GoPlay|.
   * On-the-fly information about the word under the cursor. Plug it into your
     custom Vim function.
   * Text objects such as "a function" (|go-af|) or "inner function" (|go-if|).
@@ -70,7 +70,7 @@ experience.
     building and testing.
   * Integrated with the Neovim terminal, launch |:GoRun| and other Go commands
     in a terminal buffer.
-  * Switch between `file.go` and `file_test.go` code with |:GoAlternate|.
+  * Switch between `file.gno` and `file_test.gno` code with |:GoAlternate|.
   * Supports integration with the Tagbar and ctrlp.vim plugins.
   * ...and more...
 
@@ -216,7 +216,7 @@ COMMANDS                                                         *go-commands*
 
     Open the relevant GoDoc in browser for either the word[s] passed to the
     command or by default, the word under the cursor. By default it opens the
-    documentation in 'https://pkg.go.dev'. To change it see |'g:go_doc_url'|.
+    documentation in 'https://pkg.gno.dev'. To change it see |'g:go_doc_url'|.
 
                                                                       *:GoFmt*
 :GoFmt
@@ -234,7 +234,7 @@ COMMANDS                                                         *go-commands*
                                                                      *:GoPlay*
 :[range]GoPlay
 
-    Share snippet to play.golang.org. If no [range] is given it shares
+    Share snippet to play.gnolang.org. If no [range] is given it shares
     the whole file, otherwise the selected lines are shared. Snippet URL
     is copied to system clipboard if Vim is compiled with 'clipboard' or
      'xterm-clipboard' otherwise it's get yanked into the `""` register.
@@ -289,9 +289,9 @@ g<C-LeftMouse>
     If no argument is given, it will print out an interactive list of all
     items in the stack. Its output looks like this:
 
-      1 /path/first/file.go|1187 col 16|AddThing func(t *Thing)
-    > 2 /path/thing/thing.go|624 col 19|String() string
-      3 /path/thing/thing.go|744 col 6|func Sprintln(a ...interface{}) string
+      1 /path/first/file.gno|1187 col 16|AddThing func(t *Thing)
+    > 2 /path/thing/thing.gno|624 col 19|String() string
+      3 /path/thing/thing.gno|744 col 6|func Sprintln(a ...interface{}) string
 
     This list shows the identifiers that you jumped to and the file and cursor
     position before that jump.  The older jumps are at the top, the newer at
@@ -394,7 +394,7 @@ CTRL-t
                                                                      *:GoTest*
 :GoTest[!] [expand]
 
-    Run the tests on your _test.go files via in your current directory. Errors
+    Run the tests on your _test.gno files via in your current directory. Errors
     are populated in the quickfix window.  If an argument is passed, [expand]
     is used as file selector (useful for cases like `:GoTest ./...`).
 
@@ -426,7 +426,7 @@ CTRL-t
                                                               *:GoTestCompile*
 :GoTestCompile[!] [expand]
 
-    Compile your _test.go files via in your current directory. Errors are
+    Compile your _test.gno files via in your current directory. Errors are
     populated in the quickfix window.  If an argument is passed, [expand] is
     used as file selector (useful for cases like `:GoTest ./...`). Useful to
     not run the tests and capture/fix errors before running the tests or to
@@ -687,7 +687,7 @@ CTRL-t
 :GoAlternate[!]
 
     Alternates between the implementation and test code. For example if in
-    main.go, switch to main_test.go. Uses the |'g:go_alternate_mode'| setting
+    main.gno, switch to main_test.gno. Uses the |'g:go_alternate_mode'| setting
     as the command to open the file.
 
     If [!] is given then it switches to the new file even if it does not
@@ -748,8 +748,8 @@ CTRL-t
     :Denite decls
 
     " show declarations in the file.
-    :Unite decls:foo/bar.go
-    :Denite decls:foo/bar.go
+    :Unite decls:foo/bar.gno
+    :Denite decls:foo/bar.gno
 
     " show declarations in the directory "foo".
     :Unite decls:foo
@@ -1294,7 +1294,7 @@ By default it tries to find it automatically for the current OS. >
 <
                                                     *'g:go_play_open_browser'*
 
-Use this option to open browser after posting the snippet to play.golang.org
+Use this option to open browser after posting the snippet to play.gnolang.org
 with |:GoPlay|. By default it's enabled. >
 
   let g:go_play_open_browser = 1
@@ -1466,9 +1466,9 @@ Show GoDoc in balloon. See |go#tool#DescribeBalloon()|. Default is disabled. >
                                                               *'g:go_doc_url'*
 
 godoc server URL used when |:GoDocBrowser| is used. Change if you want to use
-a private internal service. Default is 'https://pkg.go.dev'.
+a private internal service. Default is 'https://pkg.gno.dev'.
 >
-  let g:go_doc_url = 'https://pkg.go.dev'
+  let g:go_doc_url = 'https://pkg.gno.dev'
 <
 
                                                      *'g:go_doc_popup_window'*
@@ -1977,13 +1977,13 @@ By default it is enabled.
 
 Specifies either the file under the `templates` folder that is used if a new
 Go file is created. Checkout |'g:go_template_autocreate'| for more info. By
-default the `hello_world.go` file is used.
+default the `hello_world.gno` file is used.
 
 This variable can be set to an absolute path, so the template files don't have
 to be stored inside the vim-go directory structure. Useful when you want to
 use different templates for different projects.
 >
-  let g:go_template_file = "hello_world.go"
+  let g:go_template_file = "hello_world.gno"
 <
                                                    *'g:go_template_test_file'*
 
@@ -1991,9 +1991,9 @@ Like with |'g:go_template_file'|, this specifies the file to use for test
 tempaltes. The template file should be under the `templates` folder,
 alternatively absolute paths can be used, too. Checkout
 |'g:go_template_autocreate'| for more info. By default, the
-`hello_world_test.go` file is used.
+`hello_world_test.gno` file is used.
 >
-  let g:go_template_test_file = "hello_world_test.go"
+  let g:go_template_test_file = "hello_world_test.gno"
 <
                                                      *'g:go_template_use_pkg'*
 
@@ -2698,21 +2698,21 @@ a reasonable amount of performance `guru` limits this analysis to a selected
 list of packages. This is known as the "guru scope".
 
 The default is to use the package the current buffer belongs to, but this may
-not always be correct. For example for the file `guthub.com/user/pkg/a/a.go`
+not always be correct. For example for the file `guthub.com/user/pkg/a/a.gno`
 the scope will be set to `github.com/user/pkg/a`, but you probably want
 `github.com/user/pkg`
 
 Guessing what package(s) you do want is not easy so you may need to set this
 manually, usually from an |autocommand|:
 >
-  autocmd BufRead /home/martin/go/src/github.com/user/pkg/*.go
+  autocmd BufRead /home/martin/go/src/github.com/user/pkg/*.gno
         \ :GoGuruScope github.com/user/pkg
 <
 
 If you have a lot of packages with the same prefix (`github.com/user`) you can
 use a single autocommand:
 >
-  autocmd BufRead /home/martin/go/src/*.go
+  autocmd BufRead /home/martin/go/src/*.gno
         \  let s:tmp = matchlist(expand('%:p'),
             \ '/home/martin/go/src/\(github.com/user/[^/]\+\)')
         \| if len(s:tmp) > 1 |  exe 'silent :GoGuruScope ' . s:tmp[1] | endif
@@ -2747,7 +2747,7 @@ If you see errors like this:
   Error installing golang.org/x/tools/cmd/goimports
 <
 that means your local Go setup is broken or the remote website is down. For
-example sometimes code.google.com times out. To test, just execute a simple
+example sometimes code.gnoogle.com times out. To test, just execute a simple
 `go get`:
 >
   go get golang.org/x/tools/cmd/goimports

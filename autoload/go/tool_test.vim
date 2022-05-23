@@ -3,7 +3,7 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 func! Test_ExecuteInDir() abort
-  let l:tmp = gotest#write_file('a/a.go', ['package a'])
+  let l:tmp = gotest#write_file('a/a.gno', ['package a'])
   try
     let l:cwd = go#util#Exec(['pwd'])
     let l:out = go#util#ExecInDir(['pwd'])

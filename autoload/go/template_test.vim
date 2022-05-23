@@ -6,7 +6,7 @@ func! Test_TemplateCreate() abort
   try
     let l:tmp = gotest#write_file('foo/empty.txt', [''])
 
-    edit foo/bar.go
+    edit foo/bar.gno
 
     call gotest#assert_buffer(1, [
           \ 'func main() {',
@@ -18,7 +18,7 @@ func! Test_TemplateCreate() abort
 
   try
     let l:tmp = gotest#write_file('foo/empty.txt', [''])
-    edit foo/bar_test.go
+    edit foo/bar_test.gno
 
     call gotest#assert_buffer(1, [
           \ 'func TestHelloWorld(t *testing.T) {',
@@ -34,7 +34,7 @@ func! Test_TemplateCreate_UsePkg() abort
     let l:tmp = gotest#write_file('foo/empty.txt', [''])
 
     let g:go_template_use_pkg = 1
-    edit foo/bar.go
+    edit foo/bar.gno
 
     call gotest#assert_buffer(0, ['package foo'])
   finally
@@ -45,9 +45,9 @@ endfunc
 
 func! Test_TemplateCreate_PackageExists() abort
   try
-    let l:tmp = gotest#write_file('quux/quux.go', ['package foo'])
+    let l:tmp = gotest#write_file('quux/quux.gno', ['package foo'])
 
-    edit quux/bar.go
+    edit quux/bar.gno
 
     call gotest#assert_buffer(0, ['package foo'])
   finally

@@ -14,12 +14,12 @@ func! Test_SetBuildTags() abort
     let l:dir = 'test-fixtures/config/buildtags'
     let l:jumpstart = [0, 4, 2, 0]
 
-    execute 'e ' . printf('%s/buildtags.go', l:dir)
+    execute 'e ' . printf('%s/buildtags.gno', l:dir)
     let l:jumpstartbuf = bufnr('')
 
     call setpos('.', [l:jumpstartbuf, l:jumpstart[1], l:jumpstart[2], 0])
 
-    let l:expectedfilename = printf('%s/foo.go', l:dir)
+    let l:expectedfilename = printf('%s/foo.gno', l:dir)
 
     let l:expected = [0, 5, 1, 0]
     call assert_notequal(l:expected, l:jumpstart)
@@ -34,7 +34,7 @@ func! Test_SetBuildTags() abort
     call assert_equal(l:expectedfilename, bufname("%"))
     call assert_equal(l:expected, getpos('.'))
 
-    execute 'e ' . printf('%s/buildtags.go', l:dir)
+    execute 'e ' . printf('%s/buildtags.gno', l:dir)
 
     " prepare to wait for the workspace/configuration request
     let g:go_debug=['lsp']
@@ -53,11 +53,11 @@ func! Test_SetBuildTags() abort
     " close the __GOLSP_LOG__ window
     only
 
-    " verify the cursor position within buildtags.go
+    " verify the cursor position within buildtags.gno
     call setpos('.', [l:jumpstartbuf, l:jumpstart[1], l:jumpstart[2], 0])
     call assert_equal(l:jumpstart, getpos('.'))
 
-    let l:expectedfilename = printf('%s/constrainedfoo.go', l:dir)
+    let l:expectedfilename = printf('%s/constrainedfoo.gno', l:dir)
     let l:expected = [0, 6, 1, 0]
     call assert_notequal(l:expected, l:jumpstart)
 
@@ -87,7 +87,7 @@ func! Test_GoplsEnabled_Clear() abort
   try
     let g:go_gopls_enabled = 0
 
-    let l:tmp = gotest#write_file('gopls_disabled.go', [
+    let l:tmp = gotest#write_file('gopls_disabled.gno', [
           \ 'package example',
           \ '',
           \ 'func Example() {',

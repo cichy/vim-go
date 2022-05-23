@@ -255,10 +255,10 @@ endfunction
 augroup vim-go
   autocmd!
 
-  autocmd BufNewFile *.go if &modifiable | setlocal fileencoding=utf-8 fileformat=unix | endif
-  autocmd BufNewFile *.go call go#auto#template_autocreate()
-  autocmd BufRead *.go call s:gofiletype_pre()
-  autocmd BufReadPost *.go call s:gofiletype_post()
+  autocmd BufNewFile *.gno if &modifiable | setlocal fileencoding=utf-8 fileformat=unix | endif
+  autocmd BufNewFile *.gno call go#auto#template_autocreate()
+  autocmd BufRead *.gno call s:gofiletype_pre()
+  autocmd BufReadPost *.gno call s:gofiletype_post()
 
   autocmd BufNewFile *.s if &modifiable | setlocal fileencoding=utf-8 fileformat=unix | endif
   autocmd BufRead *.s call s:gofiletype_pre()

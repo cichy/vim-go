@@ -8,7 +8,7 @@ func! Test_GoTermNewMode()
   endif
 
   try
-    let l:filename = 'term/term.go'
+    let l:filename = 'term/term.gno'
     let l:tmp = gotest#load_fixture(l:filename)
     exe 'cd ' . l:tmp . '/src/term'
 
@@ -33,7 +33,7 @@ func! Test_GoTermNewMode_SplitRight()
   endif
 
   try
-    let l:filename = 'term/term.go'
+    let l:filename = 'term/term.gno'
     let l:tmp = gotest#load_fixture(l:filename)
     exe 'cd ' . l:tmp . '/src/term'
 
@@ -59,7 +59,7 @@ func! Test_GoTermReuse()
   endif
 
   try
-    let l:filename = 'term/term.go'
+    let l:filename = 'term/term.gno'
     let l:tmp = gotest#load_fixture(l:filename)
     exe 'cd ' . l:tmp . '/src/term'
 

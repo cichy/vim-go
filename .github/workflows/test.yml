@@ -33,7 +33,7 @@ jobs:
     - name: setup Go
       uses: actions/setup-go@v2.1.3
       with:
-        go-version: ${{ matrix.go }}
+        go-version: ${{ matrix.gno }}
     - name: set up python
       uses: actions/setup-python@v2.1.4
       with:

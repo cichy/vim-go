@@ -4,12 +4,12 @@ set cpo&vim
 
 func! Test_run_fmt() abort
   let actual_file = tempname()
-  call writefile(readfile("test-fixtures/fmt/hello.go"), actual_file)
+  call writefile(readfile("test-fixtures/fmt/hello.gno"), actual_file)
 
-  let expected = join(readfile("test-fixtures/fmt/hello_golden.go"), "\n")
+  let expected = join(readfile("test-fixtures/fmt/hello_golden.gno"), "\n")
 
   " run our code
-  call go#fmt#run("gofmt", actual_file, "test-fixtures/fmt/hello.go")
+  call go#fmt#run("gofmt", actual_file, "test-fixtures/fmt/hello.gno")
 
   " this should now contain the formatted code
   let actual = join(readfile(actual_file), "\n")
@@ -18,9 +18,9 @@ func! Test_run_fmt() abort
 endfunc
 
 func! Test_update_file() abort
-  let expected = join(readfile("test-fixtures/fmt/hello_golden.go"), "\n")
+  let expected = join(readfile("test-fixtures/fmt/hello_golden.gno"), "\n")
   let source_file = tempname()
-  call writefile(readfile("test-fixtures/fmt/hello_golden.go"), source_file)
+  call writefile(readfile("test-fixtures/fmt/hello_golden.gno"), source_file)
 
   let target_file = tempname()
   call writefile([""], target_file)
@@ -37,12 +37,12 @@ endfunc
 func! Test_goimports() abort
   let $GOPATH = printf('%s/%s', fnamemodify(getcwd(), ':p'), 'test-fixtures/fmt')
   let actual_file = tempname()
-  call writefile(readfile("test-fixtures/fmt/src/imports/goimports.go"), actual_file)
+  call writefile(readfile("test-fixtures/fmt/src/imports/goimports.gno"), actual_file)
 
-  let expected = join(readfile("test-fixtures/fmt/src/imports/goimports_golden.go"), "\n")
+  let expected = join(readfile("test-fixtures/fmt/src/imports/goimports_golden.gno"), "\n")
 
   " run our code
-  call go#fmt#run("goimports", actual_file, "test-fixtures/fmt/src/imports/goimports.go")
+  call go#fmt#run("goimports", actual_file, "test-fixtures/fmt/src/imports/goimports.gno")
 
   " this should now contain the formatted code
   let actual = join(readfile(actual_file), "\n")

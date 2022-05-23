@@ -4,7 +4,7 @@ set cpo&vim
 
 func! Test_impl() abort
   try
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ '',
           \ ''])
@@ -21,7 +21,7 @@ endfunc
 
 func! Test_impl_get() abort
   try
-    let l:tmp = gotest#write_file('a/a.go', [
+    let l:tmp = gotest#write_file('a/a.gno', [
           \ 'package a',
           \ '',
           \ 'type reader struct {}'])

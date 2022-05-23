@@ -31,7 +31,7 @@ if !exists('s:mapargs')
 endif
 
 function! s:goroutineID() abort
-  return s:state['currentThread'].goroutineID
+  return s:state['currentThread'].gnoroutineID
 endfunction
 
 function! s:complete(job, exit_status, data) abort
@@ -152,7 +152,7 @@ function! s:update_breakpoint(res) abort
   endif
 
   let s:state['currentThread'] = state.currentThread
-  let bufs = filter(map(range(1, winnr('$')), '[v:val,bufname(winbufnr(v:val))]'), 'v:val[1]=~"\.go$"')
+  let bufs = filter(map(range(1, winnr('$')), '[v:val,bufname(winbufnr(v:val))]'), 'v:val[1]=~"\.gno$"')
   if len(bufs) == 0
     return
   endif
@@ -309,7 +309,7 @@ function! go#debug#Stop() abort
 
   call s:stop()
 
-  let bufs = filter(map(range(1, winnr('$')), '[v:val,bufname(winbufnr(v:val))]'), 'v:val[1]=~"\.go$"')
+  let bufs = filter(map(range(1, winnr('$')), '[v:val,bufname(winbufnr(v:val))]'), 'v:val[1]=~"\.gno$"')
   if len(bufs) > 0
     exe bufs[0][0] 'wincmd w'
   else
@@ -352,7 +352,7 @@ function! s:goto_file() abort
   if m[1] == ''
     return
   endif
-  let bufs = filter(map(range(1, winnr('$')), '[v:val,bufname(winbufnr(v:val))]'), 'v:val[1]=~"\.go$"')
+  let bufs = filter(map(range(1, winnr('$')), '[v:val,bufname(winbufnr(v:val))]'), 'v:val[1]=~"\.gno$"')
   if len(bufs) == 0
     return
   endif
@@ -532,7 +532,7 @@ function! s:start_cb() abort
     autocmd! *
     call s:configureMappings('(go-debug-breakpoint)', '(go-debug-continue)')
   augroup END
-  doautocmd vim-go-debug BufWinEnter *.go
+  doautocmd vim-go-debug BufWinEnter *.gno
 endfunction
 
 function! s:continue()
@@ -566,7 +566,7 @@ function! s:continue()
     autocmd! *
     call s:configureMappings('(go-debug-breakpoint)', '(go-debug-continue)', '(go-debug-halt)', '(go-debug-next)', '(go-debug-print)', '(go-debug-step)', '(go-debug-stepout)')
   augroup END
-  doautocmd vim-go-debug BufWinEnter *.go
+  doautocmd vim-go-debug BufWinEnter *.gno
 endfunction
 
 function! s:err_cb(ch, msg) abort
@@ -979,7 +979,7 @@ function! s:eval(arg) abort
     let l:cmd = 'RPCServer.Eval'
     let l:args = {
           \ 'expr':  a:arg,
-          \ 'scope': {'GoroutineID': l:res.result.State.currentThread.goroutineID}
+          \ 'scope': {'GoroutineID': l:res.result.State.currentThread.gnoroutineID}
       \ }
 
     let l:ResultFn = funcref('s:evalResult', [])
@@ -1122,8 +1122,8 @@ function! s:show_goroutines(currentGoroutineID, res) abort
           let l:loc = l:goroutine.startLoc
           let l:goroutineType = "Start"
       endif
-      if l:goroutine.goStatementLoc.file != ""
-          let l:loc = l:goroutine.goStatementLoc
+      if l:goroutine.gnoStatementLoc.file != ""
+          let l:loc = l:goroutine.gnoStatementLoc
           let l:goroutineType = "Go"
       endif
       if l:goroutine.currentLoc.file != ""
@@ -1240,7 +1240,7 @@ function! go#debug#Set(symbol, value) abort
     call s:call_jsonrpc(function('s:handle_set'), 'RPCServer.Set', {
           \ 'symbol': a:symbol,
           \ 'value':  a:value,
-          \ 'scope':  {'GoroutineID': l:res.result.State.currentThread.goroutineID}
+          \ 'scope':  {'GoroutineID': l:res.result.State.currentThread.gnoroutineID}
     \ })
   catch
     call go#util#EchoError(printf('could not set symbol value: %s', v:exception))
@@ -1514,10 +1514,10 @@ function! s:sign_getplaced() abort
   if !exists('*sign_getplaced') " sign_getplaced was introduced in Vim 8.1.0614
     " :sign place
     " --- Signs ---
-    " Signs for a.go:
+    " Signs for a.gno:
     "     line=15  id=2  name=godebugbreakpoint
     "     line=16  id=1  name=godebugbreakpoint
-    " Signs for a_test.go:
+    " Signs for a_test.gno:
     "     line=6  id=3  name=godebugbreakpoint
 
     " l:signs should be the same sam form as the return  value for
@@ -1534,7 +1534,7 @@ function! s:sign_getplaced() abort
         " sign place's output may end with Signs instead of starting with Signs.
         " See
         " https://github.com/fatih/vim-go/issues/2920#issuecomment-644885774.
-        let l:idx = match(l:line, '\.go .* Signs:$')
+        let l:idx = match(l:line, '\.gno .* Signs:$')
         if l:idx >= 0
           let l:file = l:line[0:l:idx+2]
           continue
@@ -1576,7 +1576,7 @@ function! s:sign_getplaced() abort
   return l:signs
 endfunction
 
-exe 'sign define godebugbreakpoint text='.go#config#DebugBreakpointSignText().' texthl=GoDebugBreakpoint'
+exe 'sign define godebugbreakpoint text='.gno#config#DebugBreakpointSignText().' texthl=GoDebugBreakpoint'
 sign define godebugcurline    text== texthl=GoDebugCurrent    linehl=GoDebugCurrent
 
 " s:rpc_response is a convenience function to check for errors and return
@@ -1646,10 +1646,10 @@ function! s:configureMappings(...) abort
 
     let l:lhs = l:config.key
     try
-      call execute(printf('autocmd BufWinEnter *.go call s:save_maparg_for(expand(''%%''), ''%s'')', l:lhs))
-      call execute('autocmd BufWinLeave  *.go call s:restoreMappings()')
+      call execute(printf('autocmd BufWinEnter *.gno call s:save_maparg_for(expand(''%%''), ''%s'')', l:lhs))
+      call execute('autocmd BufWinLeave  *.gno call s:restoreMappings()')
 
-      let l:mapping = 'autocmd BufWinEnter *.go nmap <buffer>'
+      let l:mapping = 'autocmd BufWinEnter *.gno nmap <buffer>'
       if has_key(l:config, 'arguments')
         let l:mapping = printf('%s %s', l:mapping, l:config.arguments)
       endif

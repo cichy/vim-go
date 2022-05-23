@@ -17,14 +17,14 @@ func! Test_GoTest() abort
         \ {'lnum': 6, 'bufnr': 3, 'col': 0, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'another package badness'},
         \ {'lnum': 43, 'bufnr': 2, 'col': 0, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'panic: worst ever [recovered]'}
       \ ]
-  call s:test('play/play_test.go', expected)
+  call s:test('play/play_test.gno', expected)
 endfunc
 
 func! Test_GoTestConcurrentPanic()
   let expected = [
         \ {'lnum': 50, 'bufnr': 2, 'col': 0, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'panic: concurrent fail'}
       \ ]
-  call s:test('play/play_test.go', expected, "-run", "TestConcurrentPanic")
+  call s:test('play/play_test.gno', expected, "-run", "TestConcurrentPanic")
 endfunc
 
 func! Test_GoTestVerbose() abort
@@ -43,14 +43,14 @@ func! Test_GoTestVerbose() abort
         \ {'lnum': 6, 'bufnr': 3, 'col': 0, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'another package badness'},
         \ {'lnum': 43, 'bufnr': 2, 'col': 0, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'panic: worst ever [recovered]'}
       \ ]
-  call s:test('play/play_test.go', expected, "-v")
+  call s:test('play/play_test.gno', expected, "-v")
 endfunc
 
 func! Test_GoTestCompilerError() abort
   let expected = [
         \ {'lnum': 6, 'bufnr': 6, 'col': 22, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'syntax error: unexpected newline, expecting comma or )'}
       \ ]
-  call s:test('compilerror/compilerror_test.go', expected)
+  call s:test('compilerror/compilerror_test.gno', expected)
 endfunc
 
 func! Test_GoTestTimeout() abort
@@ -59,7 +59,7 @@ func! Test_GoTestTimeout() abort
       \ ]
 
   let g:go_test_timeout="500ms"
-  call s:test('timeout/timeout_test.go', expected)
+  call s:test('timeout/timeout_test.gno', expected)
   unlet g:go_test_timeout
 endfunc
 
@@ -72,7 +72,7 @@ func! Test_GoTestShowName() abort
       \ ]
 
   let g:go_test_show_name=1
-  call s:test('showname/showname_test.go', expected)
+  call s:test('showname/showname_test.gno', expected)
   unlet g:go_test_show_name
 endfunc
 
@@ -89,7 +89,7 @@ func! Test_GoTestVet() abort
       \ ]
   endif
 
-  call s:test('veterror/veterror.go', expected)
+  call s:test('veterror/veterror.gno', expected)
 endfunc
 
 func! Test_GoTestTestCompilerError() abort
@@ -107,14 +107,14 @@ func! Test_GoTestTestCompilerError() abort
         \ ]
   endif
 
-  call s:test('testcompilerror/testcompilerror_test.go', expected)
+  call s:test('testcompilerror/testcompilerror_test.gno', expected)
 endfunc
 
 func! Test_GoTestExample() abort
   let expected = [
         \ {'lnum': 0, 'bufnr': 0, 'col': 0, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'ExampleHelloWorld'}
       \ ]
-  call s:test('example/example_test.go', expected)
+  call s:test('example/example_test.gno', expected)
 endfunc
 
 func! s:test(file, expected, ...) abort

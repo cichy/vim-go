@@ -6,7 +6,7 @@ scriptencoding utf-8
 
 func! Test_jump_to_declaration_guru() abort
   try
-    let l:filename = 'def/jump.go'
+    let l:filename = 'def/jump.gno'
     let l:lnum = 5
     let l:col = 6
     let l:tmp = gotest#load_fixture(l:filename)
@@ -24,7 +24,7 @@ endfunc
 
 func! Test_jump_to_declaration_godef() abort
   try
-    let l:filename = 'def/jump.go'
+    let l:filename = 'def/jump.gno'
     let l:lnum = 5
     let l:col = 6
     let l:tmp = gotest#load_fixture(l:filename)
@@ -42,7 +42,7 @@ endfunc
 
 func! Test_Jump_leaves_lists() abort
   try
-    let l:filename = 'def/jump.go'
+    let l:filename = 'def/jump.gno'
     let l:tmp = gotest#load_fixture(l:filename)
 
     let l:expected = [{'lnum': 10, 'bufnr': bufnr('%'), 'col': 1, 'valid': 1, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': 'quux'}]
@@ -85,7 +85,7 @@ func! Test_DefJump_gopls_simple_first() abort
   try
     let g:go_def_mode = 'gopls'
 
-    let l:tmp = gotest#write_file('simple/firstposition/firstposition.go', [
+    let l:tmp = gotest#write_file('simple/firstposition/firstposition.gno', [
           \ 'package firstposition',
           \ '',
           \ 'func Example() {',
@@ -120,7 +120,7 @@ func! Test_DefJump_gopls_simple_last() abort
   try
     let g:go_def_mode = 'gopls'
 
-    let l:tmp = gotest#write_file('simple/lastposition/lastposition.go', [
+    let l:tmp = gotest#write_file('simple/lastposition/lastposition.gno', [
           \ 'package lastposition',
           \ '',
           \ 'func Example() {',
@@ -155,7 +155,7 @@ func! Test_DefJump_gopls_MultipleCodeUnit_first() abort
   try
     let g:go_def_mode = 'gopls'
 
-    let l:tmp = gotest#write_file('multiplecodeunit/firstposition/firstposition.go', [
+    let l:tmp = gotest#write_file('multiplecodeunit/firstposition/firstposition.gno', [
           \ 'package firstposition',
           \ '',
           \ 'func Example() {',
@@ -190,7 +190,7 @@ func! Test_DefJump_gopls_MultipleCodeUnit_last() abort
   try
     let g:go_def_mode = 'gopls'
 
-    let l:tmp = gotest#write_file('multiplecodeunit/lastposition/lastposition.go', [
+    let l:tmp = gotest#write_file('multiplecodeunit/lastposition/lastposition.gno', [
           \ 'package lastposition',
           \ '',
           \ 'func Example() {',

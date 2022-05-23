@@ -73,11 +73,11 @@ function! go#config#TemplateUsePkg() abort
 endfunction
 
 function! go#config#TemplateTestFile() abort
-  return get(g:, 'go_template_test_file', "hello_world_test.go")
+  return get(g:, 'go_template_test_file', "hello_world_test.gno")
 endfunction
 
 function! go#config#TemplateFile() abort
-  return get(g:, 'go_template_file', "hello_world.go")
+  return get(g:, 'go_template_file', "hello_world.gno")
 endfunction
 
 function! go#config#StatuslineDuration() abort
@@ -168,8 +168,8 @@ function! go#config#EchoCommandInfo() abort
 endfunction
 
 function! go#config#DocUrl() abort
-  let godoc_url = get(g:, 'go_doc_url', 'https://pkg.go.dev')
-  if godoc_url isnot 'https://pkg.go.dev'
+  let godoc_url = get(g:, 'go_doc_url', 'https://pkg.gno.dev')
+  if godoc_url isnot 'https://pkg.gno.dev'
     " strip last '/' character if available
     let last_char = strlen(godoc_url) - 1
     if godoc_url[last_char] == '/'

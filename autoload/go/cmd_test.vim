@@ -4,7 +4,7 @@ set cpo&vim
 
 func! Test_GoBuildErrors()
   try
-    let l:filename = 'cmd/bad.go'
+    let l:filename = 'cmd/bad.gno'
     let l:tmp = gotest#load_fixture(l:filename)
 
     " set the compiler type so that the errorformat option will be set

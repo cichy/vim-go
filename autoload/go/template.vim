@@ -19,7 +19,7 @@ function! go#template#create() abort
       call append(0, l:content)
     else
       let l:filename = expand('%:t')
-      if l:filename =~ "_test.go$"
+      if l:filename =~ "_test.gno$"
         let l:template_file = go#config#TemplateTestFile()
       else
         let l:template_file = go#config#TemplateFile()

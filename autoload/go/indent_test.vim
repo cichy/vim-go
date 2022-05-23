@@ -7,7 +7,7 @@ func! Test_indent_raw_string() abort
   syntax on
 
   try
-    let l:dir= gotest#write_file('indent/indent.go', [
+    let l:dir= gotest#write_file('indent/indent.gno', [
           \ 'package main',
           \ '',
           \ 'import "fmt"',
@@ -26,7 +26,7 @@ func! Test_indent_raw_string() abort
   endtry
 
   try
-    let l:dir= gotest#write_file('indent/indent.go', [
+    let l:dir= gotest#write_file('indent/indent.gno', [
           \ 'package main',
           \ '',
           \ 'import "fmt"',
@@ -45,7 +45,7 @@ func! Test_indent_raw_string() abort
   endtry
 
   try
-    let l:dir= gotest#write_file('indent/indent.go', [
+    let l:dir= gotest#write_file('indent/indent.gno', [
           \ 'package main',
           \ '',
           \ 'import "fmt"',

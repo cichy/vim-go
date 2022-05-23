@@ -175,7 +175,7 @@ function! go#package#FromPath(arg) abort
 
   let l:dir = go#util#Chdir(l:path)
   try
-    if glob("*.go") == ""
+    if glob("*.gno") == ""
       " There's no Go code in this directory. We might be in a module directory
       " which doesn't have any code at this level. To avoid `go list` making a
       " bunch of HTTP requests to fetch dependencies, short-circuit `go list`

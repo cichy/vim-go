@@ -24,7 +24,7 @@ function! Test_GoDebugStart_Errors() abort
   endif
 
   try
-    let l:tmp = gotest#load_fixture('debug/compilerror/main.go')
+    let l:tmp = gotest#load_fixture('debug/compilerror/main.gno')
 
     let l:expected = [
           \ {'lnum': 0, 'bufnr': 0, 'col': 0, 'valid': 0, 'vcol': 0, 'nr': -1, 'type': '', 'pattern': '', 'text': '# vim-go.test/debug/compilerror'},
@@ -63,7 +63,7 @@ function! Test_GoDebugModeRemapsAndRestoresKeys() abort
 
   try
     let g:go_debug_mappings = {'(go-debug-continue)': {'key': 'q', 'arguments': '<nowait>'}}
-    let l:tmp = gotest#load_fixture('debug/debugmain/debugmain.go')
+    let l:tmp = gotest#load_fixture('debug/debugmain/debugmain.gno')
 
     call assert_false(exists(':GoDebugStop'))
 
@@ -95,7 +95,7 @@ function! Test_GoDebugStopRemovesPlugMappings() abort
   endif
 
   try
-    let l:tmp = gotest#load_fixture('debug/debugmain/debugmain.go')
+    let l:tmp = gotest#load_fixture('debug/debugmain/debugmain.gno')
 
     call assert_false(exists(':GoDebugStop'))
 
@@ -131,7 +131,7 @@ function! s:debug(...) abort
 
   try
     let $oldgopath = $GOPATH
-    let l:tmp = gotest#load_fixture('debug/debugmain/debugmain.go')
+    let l:tmp = gotest#load_fixture('debug/debugmain/debugmain.gno')
 
     if a:0 > 1 && a:2 == 1
       let $GOPATH = $oldgopath

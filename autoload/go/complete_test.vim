@@ -9,7 +9,7 @@ func! Test_GetInfo_gopls()
 endfunction
 
 func! s:getinfo()
-    let l:filename = 'complete/complete.go'
+    let l:filename = 'complete/complete.gno'
     let l:tmp = gotest#load_fixture(l:filename)
     try
       call cursor(8, 3)

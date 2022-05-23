@@ -35,7 +35,7 @@ function! go#coverage#Buffer(bang, ...) abort
   " check if there is any test file, if not we just return
   try
     let l:dir = go#util#Chdir(expand("%:p:h"))
-    if empty(glob("*_test.go"))
+    if empty(glob("*_test.gno"))
       call go#util#EchoError("no test files available")
       return
     endif
@@ -144,7 +144,7 @@ function! go#coverage#genmatch(cov) abort
   let matches = []
 
   " if start and end are the same, also specify the byte length
-  " example: foo.go:92.2,92.65 1 0
+  " example: foo.gno:92.2,92.65 1 0
   if a:cov.startline == a:cov.endline
     call add(matches, {
           \ 'group': color,
@@ -208,11 +208,11 @@ function! go#coverage#overlay(file) abort
 
   let fname = expand('%')
 
-  " when called for a _test.go file, run the coverage for the actuall file
+  " when called for a _test.gno file, run the coverage for the actuall file
   " file
-  if fname =~# '^\f\+_test\.go$'
-    let l:root = split(fname, '_test.go$')[0]
-    let fname = l:root . ".go"
+  if fname =~# '^\f\+_test\.gno$'
+    let l:root = split(fname, '_test.gno$')[0]
+    let fname = l:root . ".gno"
 
     if !filereadable(fname)
       call go#util#EchoError("couldn't find ".fname)

@@ -12,7 +12,7 @@ set cpo&vim
 "  selected    : if 1, means it's a range of selection, otherwise it picks up the
 "                offset under the cursor
 " example output:
-"  {'cmd' : ['guru', '-json', 'implements', 'demo/demo.go:#66']}
+"  {'cmd' : ['guru', '-json', 'implements', 'demo/demo.gno:#66']}
 function! s:guru_cmd(args) range abort
   "if !go#package#InGOPATH()
     "return {'err': 'guru only supports packages within GOPATH'}

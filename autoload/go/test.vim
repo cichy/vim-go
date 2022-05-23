@@ -182,7 +182,7 @@ function! s:errorformat() abort
   " All test output lines start with the test indentation and a tab, followed
   " by the filename, a colon, the line number, another colon, a space, and the
   " message. e.g.:
-  "   '\ttime_test.go:30: Likely problem: the time zone files have not been installed.'
+  "   '\ttime_test.gno:30: Likely problem: the time zone files have not been installed.'
   let format .= ",%A" . indent . "%#%\\t%\\+%f:%l: %m"
   " also match lines that don't have a message (i.e. the message begins with a
   " newline or is the empty string):
@@ -248,7 +248,7 @@ function! s:errorformat() abort
   " hexadecimal number.
   "
   " e.g.:
-  "   '\t/usr/local/go/src/time.go:1313 +0x5d'
+  "   '\t/usr/local/go/src/time.gno:1313 +0x5d'
 
   " panicaddress and readyaddress are identical except for
   " panicaddress sets the filename and line number.
@@ -273,9 +273,9 @@ function! s:errorformat() abort
   " the running goroutine's stack.
   let format .= ",%Z" . panicaddress
 
-  " Match and ignore errors from runtime.goparkunlock(). These started
+  " Match and ignore errors from runtime.gnoparkunlock(). These started
   " appearing in stack traces from Go 1.12 test timeouts.
-  let format .= ",%-Gruntime.goparkunlock(%.%#"
+  let format .= ",%-Gruntime.gnoparkunlock(%.%#"
   let format .= ",%-G%\\t" . goroot . "%\\f%\\+:%\\d%\\+"
 
   " Match and ignore panic address without being part of a multi-line message.

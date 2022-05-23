@@ -150,7 +150,7 @@ function! Test_zero_as_start_slicing_slice() abort
 endfunction
 
 function! s:numericHighlightGroupInAssignment(testname, value)
-  let l:dir = gotest#write_file(printf('numeric/%s.go', a:testname), [
+  let l:dir = gotest#write_file(printf('numeric/%s.gno', a:testname), [
         \ 'package numeric',
         \ '',
         \ printf("var v = %s\x1f", a:value),
@@ -166,7 +166,7 @@ function! s:numericHighlightGroupInAssignment(testname, value)
 endfunction
 
 function! s:numericHighlightGroupInSliceElement(testname, value)
-  let l:dir = gotest#write_file(printf('numeric/slice-element/%s.go', a:testname), [
+  let l:dir = gotest#write_file(printf('numeric/slice-element/%s.gno', a:testname), [
         \ 'package numeric',
         \ '',
         \ printf("v := []int{%s\x1f}", a:value),
@@ -182,7 +182,7 @@ function! s:numericHighlightGroupInSliceElement(testname, value)
 endfunction
 
 function! s:numericHighlightGroupInMultidimensionalSliceElement(testname, value)
-  let l:dir = gotest#write_file(printf('numeric/slice-multidimensional-element/%s.go', a:testname), [
+  let l:dir = gotest#write_file(printf('numeric/slice-multidimensional-element/%s.gno', a:testname), [
         \ 'package numeric',
         \ '',
         \ printf("v := [][]int{{%s\x1f},{%s}}", a:value, a:value),
@@ -198,7 +198,7 @@ function! s:numericHighlightGroupInMultidimensionalSliceElement(testname, value)
 endfunction
 
 function! s:numericHighlightGroupInSliceIndex(testname, value)
-  let l:dir = gotest#write_file(printf('numeric/slice-index/%s.go', a:testname), [
+  let l:dir = gotest#write_file(printf('numeric/slice-index/%s.gno', a:testname), [
         \ 'package numeric',
         \ '',
         \ 'var sl []int',
@@ -215,7 +215,7 @@ function! s:numericHighlightGroupInSliceIndex(testname, value)
 endfunction
 
 function! s:numericHighlightGroupInMultidimensionalSliceIndex(testname, first, second)
-  let l:dir = gotest#write_file(printf('numeric/slice-multidimensional-index/%s.go', a:testname), [
+  let l:dir = gotest#write_file(printf('numeric/slice-multidimensional-index/%s.gno', a:testname), [
         \ 'package numeric',
         \ '',
         \ 'var sl [][]int',
@@ -232,7 +232,7 @@ function! s:numericHighlightGroupInMultidimensionalSliceIndex(testname, first, s
 endfunction
 
 function! s:numericHighlightGroupInSliceSlicing(testname, from, to)
-  let l:dir = gotest#write_file(printf('numeric/slice-slicing/%s.go', a:testname), [
+  let l:dir = gotest#write_file(printf('numeric/slice-slicing/%s.gno', a:testname), [
         \ 'package numeric',
         \ '',
         \ 'var sl = []int{1,2}',
@@ -305,7 +305,7 @@ endfunction
 
 function! Test_diagnostic_after_reload() abort
   let g:go_diagnostics_level = 2
-  let l:dir = gotest#write_file('diagnostic/after-reload.go', [
+  let l:dir = gotest#write_file('diagnostic/after-reload.gno', [
               \ 'package main',
               \ 'import "fmt"',
               \ '',
@@ -329,7 +329,7 @@ function! s:diagnostic_after_write(contents, changes) abort
   syntax on
 
   let g:go_diagnostics_level = 2
-  let l:dir = gotest#write_file('diagnostic/after-write.go', a:contents)
+  let l:dir = gotest#write_file('diagnostic/after-write.gno', a:contents)
 
   try
     let l:pos = getcurpos()
@@ -403,7 +403,7 @@ endfunction
 function! Test_goStringHighlight() abort
   syntax on
 
-  let l:dir = gotest#write_file('highlight/gostring.go', [
+  let l:dir = gotest#write_file('highlight/gostring.gno', [
         \ 'package highlight',
         \ '',
         \ 'import (',
@@ -425,7 +425,7 @@ endfunc
 function! Test_goImportStringHighlight() abort
   syntax on
 
-  let l:dir = gotest#write_file('highlight/import.go', [
+  let l:dir = gotest#write_file('highlight/import.gno', [
         \ 'package highlight',
         \ '',
         \ 'import (',
@@ -472,7 +472,7 @@ endfunc
 
 function! s:receiverHighlightGroup(testname, value)
   let l:package = tolower(a:testname)
-  let l:dir = gotest#write_file(printf('%s/%s.go', l:package, a:testname), [
+  let l:dir = gotest#write_file(printf('%s/%s.gno', l:package, a:testname), [
         \ printf('package %s', l:package),
         \ '',
         \ 'type T struct{}',
@@ -507,7 +507,7 @@ endfunc
 
 function! s:typeHighlightGroup(testname, value)
   let l:package = tolower(a:testname)
-  let l:dir = gotest#write_file(printf('%s/%s.go', l:package, a:testname), [
+  let l:dir = gotest#write_file(printf('%s/%s.gno', l:package, a:testname), [
         \ printf('package %s', l:package),
         \ '',
         \ printf('type %s struct{}', a:value),
@@ -540,7 +540,7 @@ endfunc
 
 function! s:functionHighlightGroup(testname, value)
   let l:package = tolower(a:testname)
-  let l:dir = gotest#write_file(printf('%s/%s.go', l:package, a:testname), [
+  let l:dir = gotest#write_file(printf('%s/%s.gno', l:package, a:testname), [
         \ printf('package %s', l:package),
         \ '',
         \ printf('func %s', a:value),
@@ -573,7 +573,7 @@ endfunc
 
 function! s:functionCallHighlightGroup(testname, value)
   let l:package = tolower(a:testname)
-  let l:dir = gotest#write_file(printf('%s/%s.go', l:package, a:testname), [
+  let l:dir = gotest#write_file(printf('%s/%s.gno', l:package, a:testname), [
         \ printf('package %s', l:package),
         \ '',
         \ 'func f() {}',
